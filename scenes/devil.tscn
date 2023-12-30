@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://jltnfni4vi8m"]
+
+[ext_resource type="Script" path="res://scenes/devil.gd" id="1_0fct2"]
+[ext_resource type="Texture2D" uid="uid://71tatgd0lnop" path="res://sprites/badguy.png" id="1_hsgjm"]
+[ext_resource type="Script" path="res://scenes/DevilHitBox.gd" id="2_ugyx6"]
+[ext_resource type="Script" path="res://scenes/DevilHurtBox.gd" id="3_buues"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ir4fm"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pjph"]
+atlas = ExtResource("1_hsgjm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbfel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pjph")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rogun"]
+radius = 8.0
+
+[node name="devil" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_0fct2")
+
+[node name="DevilAttackArea" type="Area2D" parent="."]
+script = ExtResource("2_ugyx6")
+
+[node name="DevilHitBox" type="CollisionShape2D" parent="DevilAttackArea"]
+position = Vector2(-2, 3)
+shape = SubResource("CircleShape2D_ir4fm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fbfel")
+
+[node name="DevilHurtBox" type="Area2D" parent="."]
+script = ExtResource("3_buues")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DevilHurtBox"]
+position = Vector2(-2, 3)
+shape = SubResource("CircleShape2D_ir4fm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 3)
+shape = SubResource("CircleShape2D_rogun")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhb7vn3d1twcf"]
+
+[ext_resource type="Texture2D" uid="uid://71tatgd0lnop" path="res://sprites/badguy.png" id="1_hsgjm"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_xv33k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cmas3"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pjph"]
+atlas = ExtResource("1_hsgjm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbfel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pjph")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_xv33k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2)
+shape = SubResource("CapsuleShape2D_cmas3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fbfel")
